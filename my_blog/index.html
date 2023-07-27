@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <link rel="stylesheet" href="./css/global.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <section class="hero">
+        <nav>
+          <div class="logo">
+            <img src="" alt="">
+          </div>
+          <div class="menu">
+            <ul>
+              <li><a href="#">Resume</a></li>
+              <li><a href="#">Portfolio</a></li>
+            </ul>
+          </div>
+        </nav>
+        <div class="cstmContainer">
+          <div class="cover">
+              <!-- <img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" width="100%"> -->
+          </div>
+          <div class="heroNav">
+              <div class="profile-pic">
+                <div class="imga">
+                  <img src="https://images.pexels.com/photos/3201580/pexels-photo-3201580.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" width="100%">
+                </div>
+                <div class="heroName">
+                  <span class="fs4">Jovino Monterde</span>
+                </div>
+              </div>
+              <div class="hero-menu">
+                <div>
+                  <div class="button">
+
+                  </div>
+                  <ul>
+                    <li><a href="#">Post</a></li>
+                    <li><a href="#">image</a></li>
+                  </ul>
+                </div>
+              </div>
+
+          </div>
+        </div>
+    </section>
+    <section class="home">
+       
+        <div class="subscribe-Container">
+            <form action="./php/save_data.php"  method="post" id="myForm">
+                <br />
+                <div>
+                    <label>Email: </label>
+                    <input type="email" name="email" placeholder="Email" required>
+                </div>
+                <br />
+                <div class="button">
+                <button type="submit">Send</button>
+                </div>
+            </form>
+        </div>
+        <div class="content-text">
+          <p id="dataCount"></p>
+        </div>
+        <footer>
+            <div style="display: block;">
+                <!-- <span class="fs1">Jovino Monterde</span><br />
+                <span class="fs2">Jovino Monterde</span><br />
+                <span class="fs3">Jovino Monterde</span><br />
+                <span class="fs4">Jovino Monterde</span><br />
+                <span class="fs5">Jovino Monterde</span><br />
+                <span class="fs6">Jovino Monterde</span><br /> -->
+            </div>
+        </footer>
+    </section>
+    <!-- <script src="./control_number.js"></script> -->
+    <script>
+
+
+          // Function to fetch the count data from the PHP script
+          function getCountData() {
+            fetch('./php/count_data.php')
+                .then(response => response.json())
+                .then(data => {
+                    // Update the data count on the webpage
+                    const dataCountElement = document.getElementById('dataCount');
+                    dataCountElement.textContent = `Number of records: ${data.count}`;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        // Call the function to get the count data when the page loads
+        getCountData();
+
+        document.getElementById("myForm").addEventListener("submit", function(event) {
+          event.preventDefault(); // Prevent the form from submitting normally
+      
+          // Get the form data
+          const formData = new FormData(this);
+      
+          // Send an HTTP POST request to the server
+          fetch("./php/save_data.php", {
+            method: "POST",
+            body: formData
+          })
+          .then(response => response.text())
+          .then(data => {
+            console.log(data); // Server response
+            // Do something with the response if needed
+          })
+          .catch(error => {
+            console.error("Error:", error);
+          });
+        });
+
+      </script>
+      
+</body>
+</html>
+    
